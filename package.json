@@ -1,0 +1,24 @@
+{
+  "name": "ait-canvas",
+  "version": "1.0.0",
+  "description": "Ait module with canvas bindings",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mollerse/ait-canvas.git"
+  },
+  "keywords": [
+    "Ait",
+    "canvas"
+  ],
+  "author": "Stian Møllersen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mollerse/ait-canvas/issues"
+  },
+  "homepage": "https://github.com/mollerse/ait-canvas#readme",
+  "dependencies": {
+    "ait-lang": "github:mollerse/ait-lang"
+  }
+}
