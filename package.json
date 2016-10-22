@@ -18,7 +18,7 @@
     "url": "https://github.com/mollerse/ait-canvas/issues"
   },
   "homepage": "https://github.com/mollerse/ait-canvas#readme",
-  "dependencies": {
+  "peerDependencies": {
     "ait-lang": "github:mollerse/ait-lang"
   }
 }

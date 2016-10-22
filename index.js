@@ -1,98 +1,68 @@
-const {JSWord} = require('ait-lang/interfaces');
+const jsword = require('ait-lang/interfaces');
 
-const fillRect = JSWord(function(x, y, width, height) {
-  const {ctx} = arguments[arguments.length - 1];
-  ctx.fillRect(x, y, width, height);
-});
-fillRect.produces(0);
+const fillRect = jsword(function(height, width, y, x) {
+  this.ctx.fillRect(x, y, width, height);
+}, 'fillRect');
 
-const translate = JSWord(function(x, y) {
-  const {ctx} = arguments[arguments.length - 1];
-  ctx.translate(x, y);
-});
-translate.produces(0);
+const translate = jsword(function(y, x) {
+  this.ctx.translate(x, y);
+}, 'translate');
 
-const lineWidth = JSWord(function(width) {
-  const {ctx} = arguments[arguments.length - 1];
-  ctx.lineWidth = width;
-});
-lineWidth.produces(0);
+const lineWidth = jsword(function(width) {
+  this.ctx.lineWidth = width;
+}, 'lineWidth');
 
-const globalAlpha = JSWord(function(alpha) {
-  const {ctx} = arguments[arguments.length - 1];
-  ctx.globalAlpha = alpha;
-});
-globalAlpha.produces(0);
+const globalAlpha = jsword(function(alpha) {
+  this.ctx.globalAlpha = alpha;
+}, 'globalAlpha');
 
-const strokeStyle = JSWord(function(style) {
-  const {ctx} = arguments[arguments.length - 1];
-  ctx.strokeStyle = style;
-});
-strokeStyle.produces(0);
+const strokeStyle = jsword(function(style) {
+  this.ctx.strokeStyle = style;
+}, 'strokeStyle');
 
-const fillStyle = JSWord(function(style) {
-  const {ctx} = arguments[arguments.length - 1];
-  ctx.fillStyle = style;
-});
-fillStyle.produces(0);
+const fillStyle = jsword(function(style) {
+  this.ctx.fillStyle = style;
+}, 'fillStyle');
 
-const beginPath = JSWord(function() {
-  const {ctx} = arguments[arguments.length - 1];
-  ctx.beginPath();
-});
-beginPath.produces(0);
+const beginPath = jsword(function() {
+  this.ctx.beginPath();
+}, 'beginPath');
 
-const quadraticCurveTo = JSWord(function([x, y], [cx, cy]) {
-  const {ctx} = arguments[arguments.length - 1];
-  ctx.quadraticCurveTo(x, y, cx, cy);
-});
-quadraticCurveTo.produces(0);
+const quadraticCurveTo = jsword(function({x: cx, y: cy}, {x, y}) {
+  this.ctx.quadraticCurveTo(x, y, cx, cy);
+}, 'quadraticCurveTo');
 
-const moveTo = JSWord(function([x, y]) {
-  const {ctx} = arguments[arguments.length - 1];
-  ctx.moveTo(x, y);
-});
-moveTo.produces(0);
+const moveTo = jsword(function({x, y}) {
+  this.ctx.moveTo(x, y);
+}, 'moveTo');
 
-const arc = JSWord(function([x, y], r, startAngle, endAngle, anticlockwise) {
-  const {ctx} = arguments[arguments.length - 1];
-  ctx.arc(x, y, r, startAngle, endAngle, anticlockwise);
-});
-arc.produces(0);
+const arc = jsword(function(anticlockwise, endAngle, startAngle, r, {x, y}) {
+  this.ctx.arc(x, y, r, startAngle, endAngle, anticlockwise);
+}, 'arc');
 
-const closePath = JSWord(function() {
-  const {ctx} = arguments[arguments.length - 1];
-  ctx.closePath();
-});
-closePath.produces(0);
+const closePath = jsword(function() {
+  this.ctx.closePath();
+}, 'closePath');
 
-const stroke = JSWord(function() {
-  const {ctx} = arguments[arguments.length - 1];
-  ctx.stroke();
-});
-stroke.produces(0);
+const stroke = jsword(function() {
+  this.ctx.stroke();
+}, 'stroke');
 
-const fill = JSWord(function() {
-  const {ctx} = arguments[arguments.length - 1];
-  ctx.fill();
-});
-fill.produces(0);
+const fill = jsword(function() {
+  this.ctx.fill();
+}, 'fill');
 
-const height = JSWord(function() {
-  const {canvas} = arguments[arguments.length - 1];
-  return canvas.height;
-});
-height.produces(1);
+const canvasHeight = jsword(function() {
+  return this.canvas.height;
+}, 'canvasHeight');
 
-const width = JSWord(function() {
-  const {canvas} = arguments[arguments.length - 1];
-  return canvas.width;
-});
-width.produces(1);
+const canvasWidth = jsword(function() {
+  return this.canvas.width;
+}, 'canvasWidth');
 
 module.exports = {
-  '<height': height,
-  '<width': width,
+  canvasHeight,
+  canvasWidth,
   fillRect,
   translate,
   lineWidth,
