@@ -9,3 +9,10 @@ Canvas words for the Ait Language
 ## Usage
 
 TODO
+
+## Missing
+
+- Image drawing
+- Gradients
+- Text
+- Pixel manipulation

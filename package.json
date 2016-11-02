@@ -1,7 +1,7 @@
 {
   "name": "ait-canvas",
-  "version": "1.0.0",
-  "description": "Ait module with canvas bindings",
+  "version": "0.1.0",
+  "description": "Ait module with html canvas bindings",
   "main": "index.js",
   "scripts": {},
   "repository": {
@@ -19,6 +19,6 @@
   },
   "homepage": "https://github.com/mollerse/ait-canvas#readme",
   "peerDependencies": {
-    "ait-lang": "github:mollerse/ait-lang"
+    "ait-lang": "^0.1.0"
   }
 }
