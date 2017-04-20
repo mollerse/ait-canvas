@@ -1,152 +1,152 @@
 const jsword = require('ait-lang/interfaces');
 
-const fillRect = jsword(function(height, width, {x, y}) {
+const fillRect = jsword('fillRect', function(height, width, [x, y]) {
   this.ctx.fillRect(x, y, width, height);
-}, 'fillRect');
+});
 
-const clearRect = jsword(function(height, width, {x, y}) {
+const clearRect = jsword('clearRect', function(height, width, [x, y]) {
   this.ctx.clearRect(x, y, width, height);
-}, 'clearRect');
+});
 
-const strokeRect = jsword(function(height, width, {x, y}) {
+const strokeRect = jsword('strokeRect', function(height, width, [x, y]) {
   this.ctx.strokeRect(x, y, width, height);
-}, 'strokeRect');
+});
 
-const scale = jsword(function(y, x) {
+const scale = jsword('scale', function(y, x) {
   this.ctx.scale(x, y);
-}, 'scale');
+});
 
-const rotate = jsword(function(deg) {
+const rotate = jsword('rotate', function(deg) {
   this.ctx.rotate(deg);
-}, 'rotate');
+});
 
-const translate = jsword(function(y, x) {
+const translate = jsword('translate', function(y, x) {
   this.ctx.translate(x, y);
-}, 'translate');
+});
 
-const transform = jsword(function([m11, m12, m21, m22, dx, dy]) {
+const transform = jsword('transform', function([m11, m12, m21, m22, dx, dy]) {
   this.ctx.transform(m11, m12, m21, m22, dx, dy);
-}, 'transform');
+});
 
-const setTransform = jsword(function([m11, m12, m21, m22, dx, dy]) {
+const setTransform = jsword('setTransform', function([m11, m12, m21, m22, dx, dy]) {
   this.ctx.setTransform([m11, m12, m21, m22, dx, dy]);
-}, 'setTransform');
+});
 
-const lineWidth = jsword(function(width) {
+const lineWidth = jsword('lineWidth', function(width) {
   this.ctx.lineWidth = width;
-}, 'lineWidth');
+});
 
-const lineCap = jsword(function(cap) {
+const lineCap = jsword('lineCap', function(cap) {
   this.ctx.lineCap = cap;
-}, 'lineCap');
+});
 
-const lineJoin = jsword(function(join) {
+const lineJoin = jsword('lineJoin', function(join) {
   this.ctx.lineJoin = join;
-}, 'lineJoin');
+});
 
-const miterLimit = jsword(function(limit) {
+const miterLimit = jsword('miterLimit', function(limit) {
   this.ctx.miterLimit = limit;
-}, 'miterLimit');
+});
 
-const globalAlpha = jsword(function(alpha) {
+const globalAlpha = jsword('globalAlpha', function(alpha) {
   this.ctx.globalAlpha = alpha;
-}, 'globalAlpha');
+});
 
-const globalCompositeOperation = jsword(function(operation) {
+const globalCompositeOperation = jsword('globalCompositeOperation', function(operation) {
   this.ctx.globalCompositeOperation = operation;
-}, 'globalCompositeOperation');
+});
 
-const strokeStyle = jsword(function(style) {
+const strokeStyle = jsword('strokeStyle', function(style) {
   this.ctx.strokeStyle = style;
-}, 'strokeStyle');
+});
 
-const fillStyle = jsword(function(style) {
+const fillStyle = jsword('fillStyle', function(style) {
   this.ctx.fillStyle = style;
-}, 'fillStyle');
+});
 
-const shadowOffsetX = jsword(function(offset) {
+const shadowOffsetX = jsword('shadowOffsetX', function(offset) {
   this.ctx.shadowOffsetX = offset;
-}, 'shadowOffsetX');
+});
 
-const shadowOffsetY = jsword(function(offset) {
+const shadowOffsetY = jsword('shadowOffsetY', function(offset) {
   this.ctx.shadowOffsetY = offset;
-}, 'shadowOffsetY');
+});
 
-const shadowBlur = jsword(function(blur) {
+const shadowBlur = jsword('shadowBlur', function(blur) {
   this.ctx.shadowBlur = blur;
-}, 'shadowBlur');
+});
 
-const shadowColor = jsword(function(color) {
+const shadowColor = jsword('shadowColor', function(color) {
   this.ctx.shadowColor = color;
-}, 'shadowColor');
+});
 
-const beginPath = jsword(function() {
+const beginPath = jsword('beginPath', function() {
   this.ctx.beginPath();
-}, 'beginPath');
+});
 
-const clip = jsword(function() {
+const clip = jsword('clip', function() {
   this.ctx.clip();
-}, 'clip');
+});
 
-const quadraticCurveTo = jsword(function({x, y}, {x: cpx, y: cpy}) {
+const quadraticCurveTo = jsword('quadraticCurveTo', function([x, y], [cpx, cpy]) {
   this.ctx.quadraticCurveTo(cpx, cpy, x, y);
-}, 'quadraticCurveTo');
+});
 
-const bezierCurveTo = jsword(function({x, y}, {x: cp2x, y: cp2y}, {x: cp1x, y: cp1y}) {
+const bezierCurveTo = jsword('bezierCurveTo', function([x, y], [cp2x, cp2y], [cp1x, cp1y]) {
   this.ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
-}, 'bezierCurveTo');
+});
 
-const moveTo = jsword(function({x, y}) {
+const moveTo = jsword('moveTo', function([x, y]) {
   this.ctx.moveTo(x, y);
-}, 'moveTo');
+});
 
-const lineTo = jsword(function({x, y}) {
+const lineTo = jsword('lineTo', function([x, y]) {
   this.ctx.lineTo(x, y);
-}, 'lineTo');
+});
 
-const rect = jsword(function(height, width, {x, y}) {
+const rect = jsword('rect', function(height, width, [x, y]) {
   this.ctx.rect(x, y, width, height);
-}, 'rect');
+});
 
-const arc = jsword(function(anticlockwise, endAngle, startAngle, r, {x, y}) {
+const arc = jsword('arc', function(anticlockwise, endAngle, startAngle, r, [x, y]) {
   this.ctx.arc(x, y, r, startAngle, endAngle, anticlockwise);
-}, 'arc');
+});
 
-const arcTo = jsword(function(radius, {x: x2, y: y2}, {x: x1, y: y1}) {
+const arcTo = jsword('arcTo', function(radius, [x2, y2], [x1, y1]) {
   this.ctx.arcTo(x1, y1, x2, y2, radius);
-}, 'arcTo');
+});
 
-const isPointInPath = jsword(function({x, y}) {
+const isPointInPath = jsword('isPointInPath', function([x, y]) {
   this.ctx.isPointInPath(x, y);
-}, 'isPointInPath');
+});
 
-const closePath = jsword(function() {
+const closePath = jsword('closePath', function() {
   this.ctx.closePath();
-}, 'closePath');
+});
 
-const stroke = jsword(function() {
+const stroke = jsword('stroke', function() {
   this.ctx.stroke();
-}, 'stroke');
+});
 
-const fill = jsword(function() {
+const fill = jsword('fill', function() {
   this.ctx.fill();
-}, 'fill');
+});
 
-const canvasHeight = jsword(function() {
-  return this.canvas.height;
-}, 'canvasHeight');
+const canvasHeight = jsword('canvasHeight', function() {
+  return this.ctx.canvas.height;
+});
 
-const canvasWidth = jsword(function() {
-  return this.canvas.width;
-}, 'canvasWidth');
+const canvasWidth = jsword('canvasWidth', function() {
+  return this.ctx.canvas.width;
+});
 
-const save = jsword(function() {
-  return this.ctx.save;
-}, 'save');
+const save = jsword('save', function() {
+  this.ctx.save();
+});
 
-const restore = jsword(function() {
-  return this.ctx.restore;
-}, 'restore');
+const restore = jsword('restore', function() {
+  this.ctx.restore();
+});
 
 module.exports = {
   canvasHeight,
