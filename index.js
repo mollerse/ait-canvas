@@ -148,6 +148,19 @@ const restore = jsword('restore', function() {
   this.ctx.restore();
 });
 
+const createLinearGradient = jsword('createLinearGradient', function([x2, y2], [x1, y1]) {
+  return this.ctx.createLinearGradient(x1, y1, x2, y2);
+});
+
+const createRadialGradient = jsword('createRadialGradient', function(r2, [x2, y2], r1, [x1, y1]) {
+  return this.ctx.createRadialGradient(x1, y1, r1, x2, y2, r2);
+});
+
+const addColorStop = jsword('addColorStop', function(color, offset, gradient) {
+  gradient.addColorStop(offset, color);
+  return gradient;
+})
+
 module.exports = {
   canvasHeight,
   canvasWidth,
@@ -185,5 +198,8 @@ module.exports = {
   shadowBlur,
   shadowColor,
   save,
-  restore
+  restore,
+  createLinearGradient,
+  createRadialGradient,
+  addColorStop
 };

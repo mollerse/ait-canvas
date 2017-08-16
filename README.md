@@ -13,6 +13,5 @@ TODO
 ## Missing
 
 - Image drawing
-- Gradients
 - Text
 - Pixel manipulation
