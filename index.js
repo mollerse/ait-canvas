@@ -1,152 +1,191 @@
-const jsword = require('ait-lang/interfaces');
+const {
+  aitFFIWrapValue: wrap,
+  aitFFIUnwrapValue: unwrap,
+  aitFFI__F,
+  aitFFILookupVariable: lookup,
+  aitFFIStoreRootVariable: store
+} = require('ait-lang/ffi');
 
-const fillRect = jsword('fillRect', function(height, width, [x, y]) {
-  this.ctx.fillRect(x, y, width, height);
-});
+function unwrapper(fn) {
+  return function(...args) {
+    const unwrappedArgs = args.map(function(arg) {
+      if (Array.isArray(arg.body)) {
+        return arg.body.map(unwrap).reverse();
+      } else {
+        return unwrap(arg);
+      }
+    });
+    fn.apply(this, unwrappedArgs);
+  };
+}
 
-const clearRect = jsword('clearRect', function(height, width, [x, y]) {
-  this.ctx.clearRect(x, y, width, height);
-});
+var CTX = '__aitCanvasContext';
 
-const strokeRect = jsword('strokeRect', function(height, width, [x, y]) {
-  this.ctx.strokeRect(x, y, width, height);
-});
+function canvasContext(canvas) {
+  var ctx = wrap(unwrap(canvas).getContext('2d'));
+  store(this, CTX, ctx);
+  return ctx;
+}
 
-const scale = jsword('scale', function(y, x) {
-  this.ctx.scale(x, y);
-});
+function canvasDimensions(height, width) {
+  const c = unwrap(lookup(this, CTX));
+  c.canvas.height = height;
+  c.canvas.width = width;
+}
 
-const rotate = jsword('rotate', function(deg) {
-  this.ctx.rotate(deg);
-});
+function fillRect(height, width, [x, y]) {
+  unwrap(lookup(this, CTX)).fillRect(x, y, width, height);
+}
 
-const translate = jsword('translate', function(y, x) {
-  this.ctx.translate(x, y);
-});
+function clearRect(height, width, [x, y]) {
+  unwrap(lookup(this, CTX)).clearRect(x, y, width, height);
+}
 
-const transform = jsword('transform', function([m11, m12, m21, m22, dx, dy]) {
-  this.ctx.transform(m11, m12, m21, m22, dx, dy);
-});
+function strokeRect(height, width, [x, y]) {
+  unwrap(lookup(this, CTX)).strokeRect(x, y, width, height);
+}
 
-const setTransform = jsword('setTransform', function([m11, m12, m21, m22, dx, dy]) {
-  this.ctx.setTransform([m11, m12, m21, m22, dx, dy]);
-});
+function scale(y, x) {
+  unwrap(lookup(this, CTX)).scale(x, y);
+}
 
-const lineWidth = jsword('lineWidth', function(width) {
-  this.ctx.lineWidth = width;
-});
+function rotate(deg) {
+  unwrap(lookup(this, CTX)).rotate(deg);
+}
 
-const lineCap = jsword('lineCap', function(cap) {
-  this.ctx.lineCap = cap;
-});
+function translate(y, x) {
+  unwrap(lookup(this, CTX)).translate(x, y);
+}
 
-const lineJoin = jsword('lineJoin', function(join) {
-  this.ctx.lineJoin = join;
-});
+function transform([m11, m12, m21, m22, dx, dy]) {
+  unwrap(lookup(this, CTX)).transform(m11, m12, m21, m22, dx, dy);
+}
 
-const miterLimit = jsword('miterLimit', function(limit) {
-  this.ctx.miterLimit = limit;
-});
+function setTransform([m11, m12, m21, m22, dx, dy]) {
+  unwrap(lookup(this, CTX)).setTransform([m11, m12, m21, m22, dx, dy]);
+}
 
-const globalAlpha = jsword('globalAlpha', function(alpha) {
-  this.ctx.globalAlpha = alpha;
-});
+function lineWidth(width) {
+  unwrap(lookup(this, CTX)).lineWidth = width;
+}
 
-const globalCompositeOperation = jsword('globalCompositeOperation', function(operation) {
-  this.ctx.globalCompositeOperation = operation;
-});
+function lineCap(cap) {
+  unwrap(lookup(this, CTX)).lineCap = cap;
+}
 
-const strokeStyle = jsword('strokeStyle', function(style) {
-  this.ctx.strokeStyle = style;
-});
+function lineJoin(join) {
+  unwrap(lookup(this, CTX)).lineJoin = join;
+}
 
-const fillStyle = jsword('fillStyle', function(style) {
-  this.ctx.fillStyle = style;
-});
+function miterLimit(limit) {
+  unwrap(lookup(this, CTX)).miterLimit = limit;
+}
 
-const shadowOffsetX = jsword('shadowOffsetX', function(offset) {
-  this.ctx.shadowOffsetX = offset;
-});
+function globalAlpha(alpha) {
+  unwrap(lookup(this, CTX)).globalAlpha = alpha;
+}
 
-const shadowOffsetY = jsword('shadowOffsetY', function(offset) {
-  this.ctx.shadowOffsetY = offset;
-});
+function globalCompositeOperation(operation) {
+  unwrap(lookup(this, CTX)).globalCompositeOperation = operation;
+}
 
-const shadowBlur = jsword('shadowBlur', function(blur) {
-  this.ctx.shadowBlur = blur;
-});
+function strokeStyle(style) {
+  unwrap(lookup(this, CTX)).strokeStyle = style;
+}
 
-const shadowColor = jsword('shadowColor', function(color) {
-  this.ctx.shadowColor = color;
-});
+function fillStyle(style) {
+  unwrap(lookup(this, CTX)).fillStyle = style;
+}
 
-const beginPath = jsword('beginPath', function() {
-  this.ctx.beginPath();
-});
+function shadowOffsetX(offset) {
+  unwrap(lookup(this, CTX)).shadowOffsetX = offset;
+}
 
-const clip = jsword('clip', function() {
-  this.ctx.clip();
-});
+function shadowOffsetY(offset) {
+  unwrap(lookup(this, CTX)).shadowOffsetY = offset;
+}
 
-const quadraticCurveTo = jsword('quadraticCurveTo', function([x, y], [cpx, cpy]) {
-  this.ctx.quadraticCurveTo(cpx, cpy, x, y);
-});
+function shadowBlur(blur) {
+  unwrap(lookup(this, CTX)).shadowBlur = blur;
+}
 
-const bezierCurveTo = jsword('bezierCurveTo', function([x, y], [cp2x, cp2y], [cp1x, cp1y]) {
-  this.ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
-});
+function shadowColor(color) {
+  unwrap(lookup(this, CTX)).shadowColor = color;
+}
 
-const moveTo = jsword('moveTo', function([x, y]) {
-  this.ctx.moveTo(x, y);
-});
+function beginPath() {
+  unwrap(lookup(this, CTX)).beginPath();
+}
 
-const lineTo = jsword('lineTo', function([x, y]) {
-  this.ctx.lineTo(x, y);
-});
+function clip() {
+  unwrap(lookup(this, CTX)).clip();
+}
 
-const rect = jsword('rect', function(height, width, [x, y]) {
-  this.ctx.rect(x, y, width, height);
-});
+function quadraticCurveTo([x, y], [cpx, cpy]) {
+  unwrap(lookup(this, CTX)).quadraticCurveTo(cpx, cpy, x, y);
+}
 
-const arc = jsword('arc', function(anticlockwise, endAngle, startAngle, r, [x, y]) {
-  this.ctx.arc(x, y, r, startAngle, endAngle, anticlockwise);
-});
+function bezierCurveTo([x, y], [cp2x, cp2y], [cp1x, cp1y]) {
+  unwrap(lookup(this, CTX)).bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
+}
 
-const arcTo = jsword('arcTo', function(radius, [x2, y2], [x1, y1]) {
-  this.ctx.arcTo(x1, y1, x2, y2, radius);
-});
+function moveTo([x, y]) {
+  unwrap(lookup(this, CTX)).moveTo(x, y);
+}
 
-const isPointInPath = jsword('isPointInPath', function([x, y]) {
-  this.ctx.isPointInPath(x, y);
-});
+function lineTo([x, y]) {
+  unwrap(lookup(this, CTX)).lineTo(x, y);
+}
 
-const closePath = jsword('closePath', function() {
-  this.ctx.closePath();
-});
+function rect(height, width, [x, y]) {
+  unwrap(lookup(this, CTX)).rect(x, y, width, height);
+}
 
-const stroke = jsword('stroke', function() {
-  this.ctx.stroke();
-});
+function arc(anticlockwise, endAngle, startAngle, r, [x, y]) {
+  unwrap(lookup(this, CTX)).arc(x, y, r, startAngle, endAngle, anticlockwise);
+}
 
-const fill = jsword('fill', function() {
-  this.ctx.fill();
-});
+function arcTo(radius, [x2, y2], [x1, y1]) {
+  unwrap(lookup(this, CTX)).arcTo(x1, y1, x2, y2, radius);
+}
 
-const canvasHeight = jsword('canvasHeight', function() {
-  return this.ctx.canvas.height;
-});
+function isPointInPath([x, y]) {
+  unwrap(lookup(this, CTX)).isPointInPath(x, y);
+}
 
-const canvasWidth = jsword('canvasWidth', function() {
-  return this.ctx.canvas.width;
-});
+function closePath() {
+  unwrap(lookup(this, CTX)).closePath();
+}
 
-const save = jsword('save', function() {
-  this.ctx.save();
-});
+function stroke() {
+  unwrap(lookup(this, CTX)).stroke();
+}
 
-const restore = jsword('restore', function() {
-  this.ctx.restore();
-});
+function fill() {
+  unwrap(lookup(this, CTX)).fill();
+}
+
+function canvasHeight() {
+  return wrap(unwrap(lookup(this, CTX)).canvas.height);
+}
+
+function canvasWidth() {
+  return wrap(unwrap(lookup(this, CTX)).canvas.width);
+}
+
+function save() {
+  unwrap(lookup(this, CTX)).save();
+}
+
+function restore() {
+  unwrap(lookup(this, CTX)).restore();
+}
+
+function writeImage() {
+  if (this.type != 'node') {
+    throw new Error('ait-canvas error: writeImage not supported for runtimes other than node');
+  }
+}
 
 const createLinearGradient = jsword('createLinearGradient', function([x2, y2], [x1, y1]) {
   return this.ctx.createLinearGradient(x1, y1, x2, y2);
@@ -162,44 +201,47 @@ const addColorStop = jsword('addColorStop', function(color, offset, gradient) {
 })
 
 module.exports = {
-  canvasHeight,
-  canvasWidth,
-  strokeRect,
-  fillRect,
-  clearRect,
-  scale,
-  rotate,
-  translate,
-  transform,
-  setTransform,
-  lineWidth,
-  lineJoin,
-  lineCap,
-  miterLimit,
-  globalAlpha,
-  strokeStyle,
-  fillStyle,
-  beginPath,
-  clip,
-  quadraticCurveTo,
-  bezierCurveTo,
-  moveTo,
-  lineTo,
-  rect,
-  closePath,
-  stroke,
-  arc,
-  arcTo,
-  isPointInPath,
-  fill,
-  globalCompositeOperation,
-  shadowOffsetX,
-  shadowOffsetY,
-  shadowBlur,
-  shadowColor,
-  save,
-  restore,
-  createLinearGradient,
-  createRadialGradient,
-  addColorStop
+  canvasContext: aitFFI__F(1, 'canvasContext', canvasContext),
+  canvasDimensions: aitFFI__F(2, 'canvasDimensions', unwrapper(canvasDimensions)),
+  canvasHeight: aitFFI__F(0, 'canvasHeight', canvasHeight),
+  canvasWidth: aitFFI__F(0, 'canvasWidth', canvasWidth),
+  fillRect: aitFFI__F(3, 'fillRect', unwrapper(fillRect)),
+  clearRect: aitFFI__F(3, 'clearRect', unwrapper(clearRect)),
+  strokeRect: aitFFI__F(3, 'strokeRect', unwrapper(strokeRect)),
+  scale: aitFFI__F(1, 'scale', unwrapper(scale)),
+  rotate: aitFFI__F(1, 'rotate', unwrapper(rotate)),
+  translate: aitFFI__F(2, 'translate', unwrapper(translate)),
+  transform: aitFFI__F(1, 'transform', unwrapper(transform)),
+  setTransform: aitFFI__F(1, 'setTransform', unwrapper(setTransform)),
+  lineWidth: aitFFI__F(1, 'lineWidth', unwrapper(lineWidth)),
+  globalAlpha: aitFFI__F(1, 'globalAlpha', unwrapper(globalAlpha)),
+  strokeStyle: aitFFI__F(1, 'strokeStyle', unwrapper(strokeStyle)),
+  fillStyle: aitFFI__F(1, 'fillStyle', unwrapper(fillStyle)),
+  beginPath: aitFFI__F(0, 'beginPath', beginPath),
+  clip: aitFFI__F(0, 'clip', clip),
+  quadraticCurveTo: aitFFI__F(2, 'quadraticCurveTo', unwrapper(quadraticCurveTo)),
+  bezierCurveTo: aitFFI__F(3, 'bezierCurveTo', unwrapper(bezierCurveTo)),
+  moveTo: aitFFI__F(1, 'moveTo', unwrapper(moveTo)),
+  lineTo: aitFFI__F(1, 'lineTo', unwrapper(lineTo)),
+  rect: aitFFI__F(3, 'rect', unwrapper(rect)),
+  closePath: aitFFI__F(0, 'closePath', closePath),
+  stroke: aitFFI__F(0, 'stroke', stroke),
+  arc: aitFFI__F(5, 'arc', unwrapper(arc)),
+  arcTo: aitFFI__F(3, 'arcTo', unwrapper(arcTo)),
+  isPointInPath: aitFFI__F(1, 'isPointInPath', unwrapper(isPointInPath)),
+  fill: aitFFI__F(0, 'fill', fill),
+  save: aitFFI__F(0, 'save', save),
+  restore: aitFFI__F(0, 'restore', restore),
+  lineCap: aitFFI__F(1, 'lineCap', unwrapper(lineCap)),
+  lineJoin: aitFFI__F(1, 'lineJoin', unwrapper(lineJoin)),
+  miterLimit: aitFFI__F(1, 'miterLimit', unwrapper(miterLimit)),
+  globalCompositeOperation: aitFFI__F(
+    1,
+    'globalCompositeOperation',
+    unwrapper(globalCompositeOperation)
+  ),
+  shadowOffsetX: aitFFI__F(1, 'shadowOffsetX', unwrapper(shadowOffsetX)),
+  shadowOffsetY: aitFFI__F(1, 'shadowOffsetY', unwrapper(shadowOffsetY)),
+  shadowBlur: aitFFI__F(1, 'shadowBlur', unwrapper(shadowBlur)),
+  shadowColor: aitFFI__F(1, 'shadowColor', unwrapper(shadowColor))
 };
