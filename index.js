@@ -187,18 +187,18 @@ function writeImage() {
   }
 }
 
-const createLinearGradient = jsword('createLinearGradient', function([x2, y2], [x1, y1]) {
+function createLinearGradient([x2, y2], [x1, y1]) {
   return this.ctx.createLinearGradient(x1, y1, x2, y2);
-});
+}
 
-const createRadialGradient = jsword('createRadialGradient', function(r2, [x2, y2], r1, [x1, y1]) {
+function createRadialGradient(r2, [x2, y2], r1, [x1, y1]) {
   return this.ctx.createRadialGradient(x1, y1, r1, x2, y2, r2);
-});
+}
 
-const addColorStop = jsword('addColorStop', function(color, offset, gradient) {
+function addColorStop(color, offset, gradient) {
   gradient.addColorStop(offset, color);
   return gradient;
-})
+}
 
 module.exports = {
   canvasContext: aitFFI__F(1, 'canvasContext', canvasContext),
@@ -243,5 +243,8 @@ module.exports = {
   shadowOffsetX: aitFFI__F(1, 'shadowOffsetX', unwrapper(shadowOffsetX)),
   shadowOffsetY: aitFFI__F(1, 'shadowOffsetY', unwrapper(shadowOffsetY)),
   shadowBlur: aitFFI__F(1, 'shadowBlur', unwrapper(shadowBlur)),
-  shadowColor: aitFFI__F(1, 'shadowColor', unwrapper(shadowColor))
+  shadowColor: aitFFI__F(1, 'shadowColor', unwrapper(shadowColor)),
+  createLinearGradient: aitFFI__F(2, 'createLinearGradient', createLinearGradient),
+  createRadialGradient: aitFFI__F(4, 'createRadialGradient', createRadialGradient),
+  createColorStop: aitFFI__F(3, 'createColorStop', createColorStop)
 };
