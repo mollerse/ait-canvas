@@ -246,5 +246,5 @@ module.exports = {
   shadowColor: aitFFI__F(1, 'shadowColor', unwrapper(shadowColor)),
   createLinearGradient: aitFFI__F(2, 'createLinearGradient', createLinearGradient),
   createRadialGradient: aitFFI__F(4, 'createRadialGradient', createRadialGradient),
-  createColorStop: aitFFI__F(3, 'createColorStop', createColorStop)
+  addColorStop: aitFFI__F(3, 'addColorStop', addColorStop)
 };
