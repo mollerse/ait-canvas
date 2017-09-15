@@ -37,7 +37,7 @@ function writeImage(fname) {
 }
 
 
-function writeImage(fname) {
+function writeImageAsync(fname) {
   if (this.type != 'node') {
     throw new Error('ait-canvas error: writeImage not supported for runtimes other than node');
   }
