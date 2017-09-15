@@ -4,7 +4,7 @@ const {
   aitFFI__F: aitFFIF,
   aitFFILookupVariable: lookup
 } = require('ait-lang/ffi');
-const { createWriteStream } = require('fs');
+const { writeFileSync, createWriteStream } = require('fs');
 const { join } = require('path');
 
 var CTX = '__aitCanvasContext';
@@ -30,6 +30,18 @@ function writeImage(fname) {
     throw new Error('ait-canvas error: writeImage not supported for runtimes other than node');
   }
 
+  const out = join(this.root, unwrap(fname));
+  const data = unwrap(lookup(this, CTX)).canvas.toBuffer();
+
+  writeFileSync(out, data);
+}
+
+
+function writeImage(fname) {
+  if (this.type != 'node') {
+    throw new Error('ait-canvas error: writeImage not supported for runtimes other than node');
+  }
+
   const out = createWriteStream(join(this.root, unwrap(fname)));
   const stream = unwrap(lookup(this, CTX)).canvas.pngStream();
 
@@ -44,5 +56,6 @@ function writeImage(fname) {
 
 module.exports = {
   nodeCanvas: aitFFIF(0, 'nodeCanvas', nodeCanvas),
-  writeImage: aitFFIF(1, 'writeImage', writeImage)
+  writeImage: aitFFIF(1, 'writeImage', writeImage),
+  writeImageAsync: aitFFIF(1, 'writeImageAsyc', writeImageAsync)
 };
