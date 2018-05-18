@@ -1,6 +1,6 @@
 {
   "name": "ait-canvas",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Ait module with html canvas bindings",
   "main": "index.js",
   "scripts": {},

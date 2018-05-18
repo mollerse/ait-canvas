@@ -208,7 +208,7 @@ module.exports = {
   fillRect: aitFFI__F(3, 'fillRect', unwrapper(fillRect)),
   clearRect: aitFFI__F(3, 'clearRect', unwrapper(clearRect)),
   strokeRect: aitFFI__F(3, 'strokeRect', unwrapper(strokeRect)),
-  scale: aitFFI__F(1, 'scale', unwrapper(scale)),
+  scale: aitFFI__F(2, 'scale', unwrapper(scale)),
   rotate: aitFFI__F(1, 'rotate', unwrapper(rotate)),
   translate: aitFFI__F(2, 'translate', unwrapper(translate)),
   transform: aitFFI__F(1, 'transform', unwrapper(transform)),
