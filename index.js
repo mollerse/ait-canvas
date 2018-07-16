@@ -153,6 +153,10 @@ function isPointInPath([x, y]) {
   unwrap(lookup(this, CTX)).isPointInPath(x, y);
 }
 
+function isPointInPath([x, y]) {
+  unwrap(lookup(this, CTX)).isPointInStroke(x, y);
+}
+
 function closePath() {
   unwrap(lookup(this, CTX)).closePath();
 }
@@ -229,6 +233,7 @@ module.exports = {
   arc: aitFFI__F(5, 'arc', unwrapper(arc)),
   arcTo: aitFFI__F(3, 'arcTo', unwrapper(arcTo)),
   isPointInPath: aitFFI__F(1, 'isPointInPath', unwrapper(isPointInPath)),
+  isPointInStroke: aitFFI__F(1, 'isPointInStroke', unwrapper(isPointInStroke)),
   fill: aitFFI__F(0, 'fill', fill),
   save: aitFFI__F(0, 'save', save),
   restore: aitFFI__F(0, 'restore', restore),
