@@ -191,21 +191,28 @@ function writeImage() {
   }
 }
 
-function createLinearGradient([x2, y2], [x1, y1]) {
+function createLinearGradient(p2, p1) {
+  var [x1, y1] = p1.body.map(unwrap).reverse();
+  var [x2, y2] = p2.body.map(unwrap).reverse();
+
   return wrap(unwrap(lookup(this, CTX)).createLinearGradient(x1, y1, x2, y2));
 }
 
-function createRadialGradient(r2, [x2, y2], r1, [x1, y1]) {
-  return wrap(unwrap(lookup(this, CTX)).createRadialGradient(x1, y1, r1, x2, y2, r2));
+function createRadialGradient(r2, p2, r1, p1) {
+  var [x1, y1] = p1.body.map(unwrap).reverse();
+  var [x2, y2] = p2.body.map(unwrap).reverse();
+
+  return wrap(unwrap(lookup(this, CTX)).createRadialGradient(x1, y1, unwrap(r1), x2, y2, unwrap(r2)));
 }
 
 function addColorStop(color, offset, gradient) {
-  gradient.addColorStop(offset, color);
+  unwrap(gradient).addColorStop(unwrap(offset), unwrap(color));
   return wrap(gradient);
 }
 
-function getImageData(height, width, [sx, sy]) {
-  return wrap(unwrap(lookup(this, CTX)).getImageData(sx, sy, width, height));
+function getImageData(height, width, p) {
+  var [sx, sy] = p.body.map(unwrap).reverse();
+  return wrap(unwrap(lookup(this, CTX)).getImageData(sx, sy, unwrap(width), unwrap(height)));
 }
 
 function putImageData(
@@ -271,9 +278,9 @@ module.exports = {
   shadowOffsetY: aitFFI__F(1, 'shadowOffsetY', unwrapper(shadowOffsetY)),
   shadowBlur: aitFFI__F(1, 'shadowBlur', unwrapper(shadowBlur)),
   shadowColor: aitFFI__F(1, 'shadowColor', unwrapper(shadowColor)),
-  createLinearGradient: aitFFI__F(2, 'createLinearGradient', unwrapper(createLinearGradient)),
-  createRadialGradient: aitFFI__F(4, 'createRadialGradient', unwrapper(createRadialGradient)),
-  addColorStop: aitFFI__F(3, 'addColorStop', unwrapper(addColorStop)),
-  getImageData: aitFFI__F(3, 'getImageData', unwrapper(getImageData)),
+  createLinearGradient: aitFFI__F(2, 'createLinearGradient', createLinearGradient),
+  createRadialGradient: aitFFI__F(4, 'createRadialGradient', createRadialGradient),
+  addColorStop: aitFFI__F(3, 'addColorStop', addColorStop),
+  getImageData: aitFFI__F(3, 'getImageData', getImageData),
   putImageData: aitFFI__F(5, 'putImageData', unwrapper(putImageData))
 };
