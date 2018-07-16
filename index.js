@@ -204,6 +204,28 @@ function addColorStop(color, offset, gradient) {
   return gradient;
 }
 
+function getImageData(height, width, [sx, sy]) {
+  return unwrap(lookup(this, CTX)).getImageData(sx, sy, width, height);
+}
+
+function putImageData(
+  dirtyHeight,
+  dirtyWidth,
+  [dirtyX, dirtyY],
+  [dx, dy],
+  image
+) {
+  return unwrap(lookup(this, CTX)).putImageData(
+    image,
+    dx,
+    dy,
+    dirtyX,
+    dirtyY,
+    dirtyWidth,
+    dirtyHeight
+  );
+}
+
 module.exports = {
   canvasContext: aitFFI__F(1, 'canvasContext', canvasContext),
   canvasDimensions: aitFFI__F(2, 'canvasDimensions', unwrapper(canvasDimensions)),
@@ -251,5 +273,7 @@ module.exports = {
   shadowColor: aitFFI__F(1, 'shadowColor', unwrapper(shadowColor)),
   createLinearGradient: aitFFI__F(2, 'createLinearGradient', createLinearGradient),
   createRadialGradient: aitFFI__F(4, 'createRadialGradient', createRadialGradient),
-  addColorStop: aitFFI__F(3, 'addColorStop', addColorStop)
+  addColorStop: aitFFI__F(3, 'addColorStop', addColorStop),
+  getImageData: aitFFI__F(3, 'getImageData', getImageData),
+  putImageData: aitFFI__F(5, 'putImageData', putImageData)
 };
