@@ -153,7 +153,7 @@ function isPointInPath([x, y]) {
   unwrap(lookup(this, CTX)).isPointInPath(x, y);
 }
 
-function isPointInPath([x, y]) {
+function isPointInStroke([x, y]) {
   unwrap(lookup(this, CTX)).isPointInStroke(x, y);
 }
 
