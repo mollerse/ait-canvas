@@ -192,20 +192,20 @@ function writeImage() {
 }
 
 function createLinearGradient([x2, y2], [x1, y1]) {
-  return unwrap(lookup(this, CTX)).createLinearGradient(x1, y1, x2, y2);
+  return wrap(unwrap(lookup(this, CTX)).createLinearGradient(x1, y1, x2, y2));
 }
 
 function createRadialGradient(r2, [x2, y2], r1, [x1, y1]) {
-  return unwrap(lookup(this, CTX)).createRadialGradient(x1, y1, r1, x2, y2, r2);
+  return wrap(unwrap(lookup(this, CTX)).createRadialGradient(x1, y1, r1, x2, y2, r2));
 }
 
 function addColorStop(color, offset, gradient) {
   gradient.addColorStop(offset, color);
-  return gradient;
+  return wrap(gradient);
 }
 
 function getImageData(height, width, [sx, sy]) {
-  return unwrap(lookup(this, CTX)).getImageData(sx, sy, width, height);
+  return wrap(unwrap(lookup(this, CTX)).getImageData(sx, sy, width, height));
 }
 
 function putImageData(
@@ -215,7 +215,7 @@ function putImageData(
   [dx, dy],
   image
 ) {
-  return unwrap(lookup(this, CTX)).putImageData(
+  unwrap(lookup(this, CTX)).putImageData(
     image,
     dx,
     dy,
