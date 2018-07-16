@@ -271,9 +271,9 @@ module.exports = {
   shadowOffsetY: aitFFI__F(1, 'shadowOffsetY', unwrapper(shadowOffsetY)),
   shadowBlur: aitFFI__F(1, 'shadowBlur', unwrapper(shadowBlur)),
   shadowColor: aitFFI__F(1, 'shadowColor', unwrapper(shadowColor)),
-  createLinearGradient: aitFFI__F(2, 'createLinearGradient', createLinearGradient),
-  createRadialGradient: aitFFI__F(4, 'createRadialGradient', createRadialGradient),
-  addColorStop: aitFFI__F(3, 'addColorStop', addColorStop),
-  getImageData: aitFFI__F(3, 'getImageData', getImageData),
-  putImageData: aitFFI__F(5, 'putImageData', putImageData)
+  createLinearGradient: aitFFI__F(2, 'createLinearGradient', unwrapper(createLinearGradient)),
+  createRadialGradient: aitFFI__F(4, 'createRadialGradient', unwrapper(createRadialGradient)),
+  addColorStop: aitFFI__F(3, 'addColorStop', unwrapper(addColorStop)),
+  getImageData: aitFFI__F(3, 'getImageData', unwrapper(getImageData)),
+  putImageData: aitFFI__F(5, 'putImageData', unwrapper(putImageData))
 };
