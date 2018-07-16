@@ -192,11 +192,11 @@ function writeImage() {
 }
 
 function createLinearGradient([x2, y2], [x1, y1]) {
-  return this.ctx.createLinearGradient(x1, y1, x2, y2);
+  return unwrap(lookup(this, CTX)).createLinearGradient(x1, y1, x2, y2);
 }
 
 function createRadialGradient(r2, [x2, y2], r1, [x1, y1]) {
-  return this.ctx.createRadialGradient(x1, y1, r1, x2, y2, r2);
+  return unwrap(lookup(this, CTX)).createRadialGradient(x1, y1, r1, x2, y2, r2);
 }
 
 function addColorStop(color, offset, gradient) {
